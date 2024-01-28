@@ -1,3 +1,9 @@
+-- Function to handle button clicks
+local function onButtonClicked(button)
+    print("Button clicked: " .. button.Text)
+    -- Add code to open corresponding section here
+end
+
 -- Create the UI elements
 local player = game.Players.LocalPlayer
 local ui = Instance.new("ScreenGui")
@@ -8,6 +14,7 @@ frame.Size = UDim2.new(0.3, 0, 0.8, 0)
 frame.Position = UDim2.new(0.7, 0, 0.1, 0) -- Adjusted position to top right
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
+frame.Visible = false  -- Initially hidden
 frame.Parent = ui
 
 -- Add title
@@ -37,41 +44,9 @@ button2.Position = UDim2.new(0, 0, 0.2, 0)
 button2.Text = "Section 2"
 button2.Parent = frame
 
--- Create Close UI button
-local closeButton = Instance.new("TextButton")
-closeButton.Size = UDim2.new(0.1, 0, 0.05, 0)
-closeButton.Position = UDim2.new(0.9, 0, 0, 0)
-closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
-closeButton.BorderSizePixel = 0
-closeButton.Text = "Close UI"
-closeButton.TextColor3 = Color3.new(1, 1, 1)
-closeButton.Parent = ui
-
--- Create Open UI button
-local openButton = closeButton:Clone() -- Clone closeButton properties
-openButton.BackgroundColor3 = Color3.new(0, 1, 0)
-openButton.Text = "Open UI"
-openButton.Visible = false  -- Initially hidden
-openButton.Parent = ui
-
--- Function to handle button clicks
-local function onButtonClicked(button)
-    print("Button clicked: " .. button.Text)
-    -- Add code to open corresponding section here
-end
-
--- Function to close UI
-local function closeUI()
-    ui.Enabled = false
-    closeButton.Visible = false
-    openButton.Visible = true
-end
-
--- Function to open UI
-local function openUI()
-    ui.Enabled = true
-    closeButton.Visible = true
-    openButton.Visible = false
+-- Function to toggle UI visibility
+local function toggleUI()
+    frame.Visible = not frame.Visible
 end
 
 -- Connect buttons to click event
@@ -83,5 +58,12 @@ button2.MouseButton1Click:Connect(function()
     onButtonClicked(button2)
 end)
 
-closeButton.MouseButton1Click:Connect(closeUI)
-openButton.MouseButton1Click:Connect(openUI)
+-- Run the keyboard script
+loadstring(game:HttpGet("https://raw.githubusercontent.com/GGH52lan/GGH52lan/main/keyboard.txt"))()
+
+-- Function to handle right shift key press
+game:GetService("UserInputService").InputBegan:Connect(function(input)
+    if input.KeyCode == Enum.KeyCode.RightShift then
+        toggleUI()
+    end
+end)
