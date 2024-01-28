@@ -135,24 +135,3 @@ end
 -- Connect toggle functions to input events
 UserInputService.InputBegan:Connect(toggleUIWithLeftShift)
 UserInputService.InputBegan:Connect(toggleUIWithRightShift)
-
--- Dragging functionality for mobile and PC
-local isDragging = false
-local dragStart = nil
-
-local function startDrag(input)
-    if input.UserInputType == Enum.UserInputType.Touch then
-        dragStart = input.Position
-    elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
-        dragStart = input.Position
-    end
-    isDragging = true
-end
-
-local function endDrag()
-    isDragging = false
-end
-
-local function drag(input)
-    if isDragging then
-       
