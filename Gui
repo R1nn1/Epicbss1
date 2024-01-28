@@ -4,8 +4,8 @@ local ui = Instance.new("ScreenGui")
 ui.Parent = player.PlayerGui
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.3, 0, 0.8, 0)
-frame.Position = UDim2.new(0.7, 0, 0.1, 0) -- Adjusted position to top right
+frame.Size = UDim2.new(0.25, 0, 0.8, 0) -- Adjusted size to be closer to the middle
+frame.Position = UDim2.new(0.375, 0, 0.1, 0) -- Adjusted position to be closer to the middle
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
 frame.Parent = ui
@@ -23,19 +23,24 @@ title.TextSize = 18
 title.Parent = frame
 
 -- Create buttons
-local button1 = Instance.new("TextButton")
-button1.Size = UDim2.new(1, 0, 0.1, 0)
-button1.Position = UDim2.new(0, 0, 0.1, 0)
-button1.BackgroundColor3 = Color3.new(1, 1, 1)
-button1.BorderSizePixel = 0
-button1.Text = "Section 1"
-button1.TextColor3 = Color3.new(0, 0, 0)
-button1.Parent = frame
+local farmingButton = Instance.new("TextButton")
+farmingButton.Size = UDim2.new(1, 0, 0.1, 0)
+farmingButton.Position = UDim2.new(0, 0, 0.1, 0)
+farmingButton.BackgroundColor3 = Color3.new(1, 1, 1)
+farmingButton.BorderSizePixel = 0
+farmingButton.Text = "Farming"
+farmingButton.TextColor3 = Color3.new(0, 0, 0)
+farmingButton.Parent = frame
 
-local button2 = button1:Clone()
-button2.Position = UDim2.new(0, 0, 0.2, 0)
-button2.Text = "Section 2"
-button2.Parent = frame
+local combatButton = farmingButton:Clone()
+combatButton.Position = UDim2.new(0, 0, 0.2, 0)
+combatButton.Text = "Combat"
+combatButton.Parent = frame
+
+local visualsButton = combatButton:Clone()
+visualsButton.Position = UDim2.new(0, 0, 0.3, 0)
+visualsButton.Text = "Visuals"
+visualsButton.Parent = frame
 
 -- Create Close UI button
 local closeButton = Instance.new("TextButton")
@@ -68,12 +73,16 @@ local function openUI()
 end
 
 -- Connect buttons to click event
-button1.MouseButton1Click:Connect(function()
-    onButtonClicked(button1)
+farmingButton.MouseButton1Click:Connect(function()
+    onButtonClicked(farmingButton)
 end)
 
-button2.MouseButton1Click:Connect(function()
-    onButtonClicked(button2)
+combatButton.MouseButton1Click:Connect(function()
+    onButtonClicked(combatButton)
+end)
+
+visualsButton.MouseButton1Click:Connect(function()
+    onButtonClicked(visualsButton)
 end)
 
 closeButton.MouseButton1Click:Connect(closeUI)
