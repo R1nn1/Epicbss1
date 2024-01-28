@@ -1,11 +1,19 @@
+local UserInputService = game:GetService("UserInputService")
+
+-- Check if the player is in the supported game
+local supportedGameId = 1537690962 -- Replace with the supported game ID
+if game.PlaceId ~= supportedGameId then
+    game.Players.LocalPlayer:Kick("Game not supported")
+end
+
 -- Create the UI elements
 local player = game.Players.LocalPlayer
 local ui = Instance.new("ScreenGui")
 ui.Parent = player.PlayerGui
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.25, 0, 0.8, 0) -- Adjusted size to be closer to the middle
-frame.Position = UDim2.new(0.375, 0, 0.1, 0) -- Adjusted position to be closer to the middle
+frame.Size = UDim2.new(0.4, 0, 0.8, 0) -- Adjusted size to be larger
+frame.Position = UDim2.new(0.3, 0, 0.1, 0) -- Adjusted position to be closer to the middle
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
 frame.Parent = ui
@@ -99,3 +107,29 @@ openButton.Parent = ui
 
 openButton.MouseButton1Click:Connect(openUI)
 openButton.Visible = false  -- Initially hidden
+
+-- Function to toggle UI with left shift
+local function toggleUIWithLeftShift(input)
+    if input.KeyCode == Enum.KeyCode.LeftShift then
+        if ui.Enabled then
+            closeUI()
+        else
+            openUI()
+        end
+    end
+end
+
+-- Function to toggle UI with right shift
+local function toggleUIWithRightShift(input)
+    if input.KeyCode == Enum.KeyCode.RightShift then
+        if ui.Enabled then
+            closeUI()
+        else
+            openUI()
+        end
+    end
+end
+
+-- Connect toggle functions to input events
+UserInputService.InputBegan:Connect(toggleUIWithLeftShift)
+UserInputService.InputBegan:Connect(toggleUIWithRightShift)
