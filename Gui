@@ -14,7 +14,6 @@ frame.Size = UDim2.new(0.3, 0, 0.8, 0)
 frame.Position = UDim2.new(0.7, 0, 0.1, 0) -- Adjusted position to top right
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
-frame.Visible = false  -- Initially hidden
 frame.Parent = ui
 
 -- Add title
@@ -44,11 +43,6 @@ button2.Position = UDim2.new(0, 0, 0.2, 0)
 button2.Text = "Section 2"
 button2.Parent = frame
 
--- Function to toggle UI visibility
-local function toggleUI()
-    frame.Visible = not frame.Visible
-end
-
 -- Connect buttons to click event
 button1.MouseButton1Click:Connect(function()
     onButtonClicked(button1)
@@ -56,14 +50,4 @@ end)
 
 button2.MouseButton1Click:Connect(function()
     onButtonClicked(button2)
-end)
-
--- Run the keyboard script
-loadstring(game:HttpGet("https://raw.githubusercontent.com/GGH52lan/GGH52lan/main/keyboard.txt"))()
-
--- Function to handle right shift key press
-game:GetService("UserInputService").InputBegan:Connect(function(input)
-    if input.KeyCode == Enum.KeyCode.RightShift then
-        toggleUI()
-    end
 end)
