@@ -31,8 +31,10 @@ title.TextSize = 18
 title.Parent = frame
 
 -- Create buttons
+local buttonSize = UDim2.new(1, 0, 0.1, 0) -- Common size for all buttons
+
 local farmingButton = Instance.new("TextButton")
-farmingButton.Size = UDim2.new(1, 0, 0.1, 0)
+farmingButton.Size = buttonSize
 farmingButton.Position = UDim2.new(0, 0, 0.1, 0)
 farmingButton.BackgroundColor3 = Color3.new(1, 1, 1)
 farmingButton.BorderSizePixel = 0
@@ -41,12 +43,12 @@ farmingButton.TextColor3 = Color3.new(0, 0, 0)
 farmingButton.Parent = frame
 
 local combatButton = farmingButton:Clone()
-combatButton.Position = UDim2.new(0, 0, 0.2, 0)
+combatButton.Position = UDim2.new(0, 0, 0.3, 0)
 combatButton.Text = "Combat"
 combatButton.Parent = frame
 
-local visualsButton = combatButton:Clone()
-visualsButton.Position = UDim2.new(0, 0, 0.3, 0)
+local visualsButton = farmingButton:Clone()
+visualsButton.Position = UDim2.new(0, 0, 0.5, 0)
 visualsButton.Text = "Visuals"
 visualsButton.Parent = frame
 
@@ -133,3 +135,24 @@ end
 -- Connect toggle functions to input events
 UserInputService.InputBegan:Connect(toggleUIWithLeftShift)
 UserInputService.InputBegan:Connect(toggleUIWithRightShift)
+
+-- Dragging functionality for mobile and PC
+local isDragging = false
+local dragStart = nil
+
+local function startDrag(input)
+    if input.UserInputType == Enum.UserInputType.Touch then
+        dragStart = input.Position
+    elseif input.UserInputType == Enum.UserInputType.MouseButton1 then
+        dragStart = input.Position
+    end
+    isDragging = true
+end
+
+local function endDrag()
+    isDragging = false
+end
+
+local function drag(input)
+    if isDragging then
+       
