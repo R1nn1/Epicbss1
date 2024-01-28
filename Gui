@@ -1,9 +1,3 @@
--- Function to handle button clicks
-local function onButtonClicked(button)
-    print("Button clicked: " .. button.Text)
-    -- Add code to open corresponding section here
-end
-
 -- Create the UI elements
 local player = game.Players.LocalPlayer
 local ui = Instance.new("ScreenGui")
@@ -43,6 +37,36 @@ button2.Position = UDim2.new(0, 0, 0.2, 0)
 button2.Text = "Section 2"
 button2.Parent = frame
 
+-- Create Close UI button
+local closeButton = Instance.new("TextButton")
+closeButton.Size = UDim2.new(0.1, 0, 0.05, 0)
+closeButton.Position = UDim2.new(0.9, 0, 0, 0)
+closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
+closeButton.BorderSizePixel = 0
+closeButton.Text = "Close UI"
+closeButton.TextColor3 = Color3.new(1, 1, 1)
+closeButton.Parent = ui
+
+-- Function to handle button clicks
+local function onButtonClicked(button)
+    print("Button clicked: " .. button.Text)
+    -- Add code to open corresponding section here
+end
+
+-- Function to close UI
+local function closeUI()
+    ui.Enabled = false
+    closeButton.Visible = false
+    openButton.Visible = true
+end
+
+-- Function to open UI
+local function openUI()
+    ui.Enabled = true
+    closeButton.Visible = true
+    openButton.Visible = false
+end
+
 -- Connect buttons to click event
 button1.MouseButton1Click:Connect(function()
     onButtonClicked(button1)
@@ -51,3 +75,18 @@ end)
 button2.MouseButton1Click:Connect(function()
     onButtonClicked(button2)
 end)
+
+closeButton.MouseButton1Click:Connect(closeUI)
+
+-- Create Open UI button
+local openButton = Instance.new("TextButton")
+openButton.Size = UDim2.new(0.1, 0, 0.05, 0)
+openButton.Position = UDim2.new(0.9, 0, 0, 0)
+openButton.BackgroundColor3 = Color3.new(0, 1, 0)
+openButton.BorderSizePixel = 0
+openButton.Text = "Open UI"
+openButton.TextColor3 = Color3.new(1, 1, 1)
+openButton.Parent = ui
+
+openButton.MouseButton1Click:Connect(openUI)
+openButton.Visible = false  -- Initially hidden
