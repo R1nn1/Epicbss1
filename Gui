@@ -47,6 +47,13 @@ closeButton.Text = "Close UI"
 closeButton.TextColor3 = Color3.new(1, 1, 1)
 closeButton.Parent = ui
 
+-- Create Open UI button
+local openButton = closeButton:Clone() -- Clone closeButton properties
+openButton.BackgroundColor3 = Color3.new(0, 1, 0)
+openButton.Text = "Open UI"
+openButton.Visible = false  -- Initially hidden
+openButton.Parent = ui
+
 -- Function to handle button clicks
 local function onButtonClicked(button)
     print("Button clicked: " .. button.Text)
@@ -77,17 +84,4 @@ button2.MouseButton1Click:Connect(function()
 end)
 
 closeButton.MouseButton1Click:Connect(closeUI)
-
--- Create Open UI button
-local openButton = Instance.new("TextButton")
-openButton.Size = UDim2.new(0.1, 0, 0.05, 0)
-openButton.Position = UDim2.new(0.9, 0, 0, 0)
-openButton.BackgroundColor3 = Color3.new(0, 1, 0)
-openButton.BorderSizePixel = 0
-openButton.Text = "Open UI"
-openButton.TextColor3 = Color3.new(1, 1, 1)
-openButton.Parent = ui
-
 openButton.MouseButton1Click:Connect(openUI)
-openButton.Visible = false  -- Initially hidden
-
