@@ -30,27 +30,15 @@ title.Font = Enum.Font.SourceSans
 title.TextSize = 18
 title.Parent = frame
 
--- Create buttons
-local buttonSize = UDim2.new(0.4, 0, 0.1, 0) -- Adjusted size for smaller buttons
-
+-- Create Farming button
 local farmingButton = Instance.new("TextButton")
-farmingButton.Size = buttonSize
-farmingButton.Position = UDim2.new(0.05, 0, 0.2, 0)
-farmingButton.BackgroundColor3 = Color3.new(1, 1, 1)
+farmingButton.Size = UDim2.new(0.1, 0, 0.05, 0) -- Adjusted size
+farmingButton.Position = UDim2.new(0.9, 0, 0.1, 0) -- Adjusted position
+farmingButton.BackgroundColor3 = Color3.new(0, 0, 1) -- Adjusted color
 farmingButton.BorderSizePixel = 0
 farmingButton.Text = "Farming"
-farmingButton.TextColor3 = Color3.new(0, 0, 0)
-farmingButton.Parent = frame
-
-local combatButton = farmingButton:Clone()
-combatButton.Position = UDim2.new(0.55, 0, 0.2, 0)
-combatButton.Text = "Combat"
-combatButton.Parent = frame
-
-local visualsButton = farmingButton:Clone()
-visualsButton.Position = UDim2.new(0.3, 0, 0.4, 0)
-visualsButton.Text = "Visuals"
-visualsButton.Parent = frame
+farmingButton.TextColor3 = Color3.new(1, 1, 1)
+farmingButton.Parent = ui
 
 -- Create Close UI button
 local closeButton = Instance.new("TextButton")
@@ -61,36 +49,6 @@ closeButton.BorderSizePixel = 0
 closeButton.Text = "Close UI"
 closeButton.TextColor3 = Color3.new(1, 1, 1)
 closeButton.Parent = ui
-
--- Create farming section
-local farmingSection = Instance.new("Frame")
-farmingSection.Size = UDim2.new(0.8, 0, 0.6, 0)
-farmingSection.Position = UDim2.new(0.1, 0, 0.2, 0)
-farmingSection.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-farmingSection.BorderSizePixel = 0
-farmingSection.Visible = false
-farmingSection.Parent = frame
-
-local farmingTextLabel = Instance.new("TextLabel")
-farmingTextLabel.Size = UDim2.new(1, 0, 1, 0)
-farmingTextLabel.Position = UDim2.new(0, 0, 0, 0)
-farmingTextLabel.BackgroundColor3 = Color3.new(1, 1, 1)
-farmingTextLabel.BorderSizePixel = 0
-farmingTextLabel.Text = "Farming Section"
-farmingTextLabel.TextColor3 = Color3.new(0, 0, 0)
-farmingTextLabel.Font = Enum.Font.SourceSans
-farmingTextLabel.TextSize = 18
-farmingTextLabel.Parent = farmingSection
-
--- Function to handle button clicks
-local function onButtonClicked(button)
-    print("Button clicked: " .. button.Text)
-    if button == farmingButton then
-        farmingSection.Visible = true
-    else
-        farmingSection.Visible = false
-    end
-end
 
 -- Function to close UI
 local function closeUI()
@@ -105,19 +63,6 @@ local function openUI()
     closeButton.Visible = true
     openButton.Visible = false
 end
-
--- Connect buttons to click event
-farmingButton.MouseButton1Click:Connect(function()
-    onButtonClicked(farmingButton)
-end)
-
-combatButton.MouseButton1Click:Connect(function()
-    onButtonClicked(combatButton)
-end)
-
-visualsButton.MouseButton1Click:Connect(function()
-    onButtonClicked(visualsButton)
-end)
 
 closeButton.MouseButton1Click:Connect(closeUI)
 
