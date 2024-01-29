@@ -12,33 +12,79 @@ local gui = Instance.new("ScreenGui")
 gui.Parent = player.PlayerGui
 
 local frame = Instance.new("Frame")
-frame.Size = UDim2.new(0.4, 0, 0.8, 0) -- Adjusted size to be larger
-frame.Position = UDim2.new(0.05, 0, 0.1, 0) -- Adjusted position to the left side
+frame.Size = UDim2.new(0.4, 0, 0.3, 0) -- Adjusted size
+frame.Position = UDim2.new(0.3, 0, 0.35, 0) -- Adjusted position
 frame.BackgroundColor3 = Color3.new(0, 0, 0)
 frame.BorderSizePixel = 0
 frame.Parent = gui
 
 -- Add title
 local title = Instance.new("TextLabel")
-title.Size = UDim2.new(1, 0, 0.1, 0)
+title.Size = UDim2.new(1, 0, 0.2, 0)
 title.Position = UDim2.new(0, 0, 0, 0)
 title.BackgroundColor3 = Color3.new(1, 1, 1)
 title.BorderSizePixel = 0
-title.Text = "Rinn's Script (BSS)"
+title.Text = "Enter the Key"
 title.TextColor3 = Color3.new(0, 0, 0)
 title.Font = Enum.Font.SourceSans
 title.TextSize = 18
 title.Parent = frame
 
--- Create Farming button
-local farmingButton = Instance.new("TextButton")
-farmingButton.Size = UDim2.new(0.3, 0, 0.1, 0) -- Adjusted size to be larger
-farmingButton.Position = UDim2.new(0, 0, 0.2, 0) -- Adjusted position to the left side
-farmingButton.BackgroundColor3 = Color3.new(0, 0, 1) -- Adjusted color
-farmingButton.BorderSizePixel = 0
-farmingButton.Text = "Farming"
-farmingButton.TextColor3 = Color3.new(1, 1, 1)
-farmingButton.Parent = frame
+-- Add text box
+local textBox = Instance.new("TextBox")
+textBox.Size = UDim2.new(0.6, 0, 0.2, 0)
+textBox.Position = UDim2.new(0.2, 0, 0.4, 0)
+textBox.BackgroundColor3 = Color3.new(1, 1, 1)
+textBox.BorderSizePixel = 0
+textBox.TextColor3 = Color3.new(0, 0, 0)
+textBox.Parent = frame
+
+-- Add confirm button
+local confirmButton = Instance.new("TextButton")
+confirmButton.Size = UDim2.new(0.4, 0, 0.2, 0)
+confirmButton.Position = UDim2.new(0.3, 0, 0.7, 0)
+confirmButton.BackgroundColor3 = Color3.new(0, 0, 0)
+confirmButton.BorderSizePixel = 0
+confirmButton.Text = "Confirm"
+confirmButton.TextColor3 = Color3.new(1, 1, 1)
+confirmButton.Font = Enum.Font.SourceSans
+confirmButton.TextSize = 18
+confirmButton.Parent = frame
+
+-- Function to check key and show GUI
+local function checkKeyAndShowGUI()
+    if textBox.Text == "BETATESTING" then
+        gui.Enabled = true
+        frame.Visible = false
+        print("Key is correct")
+        -- Add notification here if desired
+    else
+        -- Add error handling here if desired
+    end
+end
+
+confirmButton.MouseButton1Click:Connect(checkKeyAndShowGUI)
+
+-- Create the GUI
+local guiFrame = Instance.new("Frame")
+guiFrame.Size = UDim2.new(0.4, 0, 0.8, 0) -- Adjusted size to be larger
+guiFrame.Position = UDim2.new(0.3, 0, 0.1, 0) -- Adjusted position to be closer to the middle
+guiFrame.BackgroundColor3 = Color3.new(0, 0, 0)
+guiFrame.BorderSizePixel = 0
+guiFrame.Visible = false -- Initially hidden
+guiFrame.Parent = gui
+
+-- Add title to GUI
+local guiTitle = Instance.new("TextLabel")
+guiTitle.Size = UDim2.new(1, 0, 0.1, 0)
+guiTitle.Position = UDim2.new(0, 0, 0, 0)
+guiTitle.BackgroundColor3 = Color3.new(1, 1, 1)
+guiTitle.BorderSizePixel = 0
+guiTitle.Text = "Rinn's Script (BSS)"
+guiTitle.TextColor3 = Color3.new(0, 0, 0)
+guiTitle.Font = Enum.Font.SourceSans
+guiTitle.TextSize = 18
+guiTitle.Parent = guiFrame
 
 -- Create Close UI button
 local closeButton = Instance.new("TextButton")
@@ -48,18 +94,18 @@ closeButton.BackgroundColor3 = Color3.new(1, 0, 0)
 closeButton.BorderSizePixel = 0
 closeButton.Text = "Close UI"
 closeButton.TextColor3 = Color3.new(1, 1, 1)
-closeButton.Parent = gui
+closeButton.Parent = guiFrame
 
 -- Function to close UI
 local function closeUI()
-    gui.Enabled = false
+    guiFrame.Visible = false
     closeButton.Visible = false
     openButton.Visible = true
 end
 
 -- Function to open UI
 local function openUI()
-    gui.Enabled = true
+    guiFrame.Visible = true
     closeButton.Visible = true
     openButton.Visible = false
 end
@@ -82,7 +128,7 @@ openButton.Visible = false  -- Initially hidden
 -- Function to toggle UI with left shift
 local function toggleUIWithLeftShift(input)
     if input.KeyCode == Enum.KeyCode.LeftShift then
-        if gui.Enabled then
+        if guiFrame.Visible then
             closeUI()
         else
             openUI()
@@ -93,7 +139,7 @@ end
 -- Function to toggle UI with right shift
 local function toggleUIWithRightShift(input)
     if input.KeyCode == Enum.KeyCode.RightShift then
-        if gui.Enabled then
+        if guiFrame.Visible then
             closeUI()
         else
             openUI()
