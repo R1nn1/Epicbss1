@@ -54,8 +54,8 @@ confirmButton.Parent = frame
 -- Function to check key and show GUI
 local function checkKeyAndShowGUI()
     if textBox.Text == "BETATESTING" then
-        gui.Enabled = true
         frame.Visible = false
+        guiFrame.Visible = true
         print("Key is correct")
         -- Add notification here if desired
     else
