@@ -32,13 +32,13 @@ title.Parent = frame
 
 -- Create Farming button
 local farmingButton = Instance.new("TextButton")
-farmingButton.Size = UDim2.new(0.1, 0, 0.05, 0) -- Adjusted size
-farmingButton.Position = UDim2.new(0.9, 0, 0.1, 0) -- Adjusted position
+farmingButton.Size = UDim2.new(0.2, 0, 0.05, 0) -- Adjusted size
+farmingButton.Position = UDim2.new(0.05, 0, 0.2, 0) -- Adjusted position to the left
 farmingButton.BackgroundColor3 = Color3.new(0, 0, 1) -- Adjusted color
 farmingButton.BorderSizePixel = 0
 farmingButton.Text = "Farming"
 farmingButton.TextColor3 = Color3.new(1, 1, 1)
-farmingButton.Parent = ui
+farmingButton.Parent = frame
 
 -- Create Close UI button
 local closeButton = Instance.new("TextButton")
